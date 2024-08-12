@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lifespark_machine_task/src/domain/usecases/sent_otp_usecase.dart';
+import 'package:lifespark_machine_task/src/presentation/providers/user_provider.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/custom_filled_button.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/logo_label_widget.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/phone_number_input_field.dart';
-import 'package:lifespark_machine_task/injection_container.dart' as di;
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,8 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> onLoginPressed() async {
     if (formKey.currentState!.validate()) {
-      final sentOtpUsecase = di.getIt.get<SentOtpUsecase>();
-      await sentOtpUsecase.call(phnNumber, context);
+      Provider.of<UserProvider>(context, listen: false)
+          .sentOtp(phnNumber, context);
     }
   }
 }

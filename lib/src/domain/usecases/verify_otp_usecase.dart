@@ -5,7 +5,7 @@ class VerifyOtpUsecase {
 
   VerifyOtpUsecase({required this.userRepository});
 
-  Future<String> call(String verificationId, userOtp) async {
+  Future<String> call(String verificationId, String userOtp) async {
     return await userRepository.verifyOtp(verificationId, userOtp);
   }
 }

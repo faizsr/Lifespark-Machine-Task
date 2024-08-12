@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAtykSoEb-UwB8LIQqHarmw1PrCHoZZJ5c',
-    appId: '1:750026915544:web:1e9ab63ad1d0252d61a1ad',
-    messagingSenderId: '750026915544',
-    projectId: 'lifespark-69501',
-    authDomain: 'lifespark-69501.firebaseapp.com',
-    storageBucket: 'lifespark-69501.appspot.com',
-    measurementId: 'G-RLGHYV04BS',
+    apiKey: 'AIzaSyDNGf1L8X-Oou4ZBf9c1-02RhBRGWZ3p0o',
+    appId: '1:74964081753:web:8f71ef89e9855327b76548',
+    messagingSenderId: '74964081753',
+    projectId: 'lifespark-2',
+    authDomain: 'lifespark-2.firebaseapp.com',
+    storageBucket: 'lifespark-2.appspot.com',
+    measurementId: 'G-HRPE9MRFCK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB9hUjUfpEwYD_t-FcZduEl9yIIHcKHEjI',
-    appId: '1:750026915544:android:8a471a9e78e76e4c61a1ad',
-    messagingSenderId: '750026915544',
-    projectId: 'lifespark-69501',
-    storageBucket: 'lifespark-69501.appspot.com',
+    apiKey: 'AIzaSyDk2gqZMe6KeTVra3pZrBUzrNZDf0z_fmo',
+    appId: '1:74964081753:android:acaa96b969bf8a90b76548',
+    messagingSenderId: '74964081753',
+    projectId: 'lifespark-2',
+    storageBucket: 'lifespark-2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDMr4nEdqXwym6S9jKzESq-NDkC9PoDlSs',
-    appId: '1:750026915544:ios:839dd264c69efe2b61a1ad',
-    messagingSenderId: '750026915544',
-    projectId: 'lifespark-69501',
-    storageBucket: 'lifespark-69501.appspot.com',
+    apiKey: 'AIzaSyDou6DFWqJxy1C_5UZ4_UNNSF1CXXFFw4o',
+    appId: '1:74964081753:ios:c28f6ad6b01717d7b76548',
+    messagingSenderId: '74964081753',
+    projectId: 'lifespark-2',
+    storageBucket: 'lifespark-2.appspot.com',
     iosBundleId: 'com.example.lifesparkMachineTask',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDMr4nEdqXwym6S9jKzESq-NDkC9PoDlSs',
-    appId: '1:750026915544:ios:839dd264c69efe2b61a1ad',
-    messagingSenderId: '750026915544',
-    projectId: 'lifespark-69501',
-    storageBucket: 'lifespark-69501.appspot.com',
+    apiKey: 'AIzaSyDou6DFWqJxy1C_5UZ4_UNNSF1CXXFFw4o',
+    appId: '1:74964081753:ios:c28f6ad6b01717d7b76548',
+    messagingSenderId: '74964081753',
+    projectId: 'lifespark-2',
+    storageBucket: 'lifespark-2.appspot.com',
     iosBundleId: 'com.example.lifesparkMachineTask',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAtykSoEb-UwB8LIQqHarmw1PrCHoZZJ5c',
-    appId: '1:750026915544:web:30e0a1b8d48d9c6661a1ad',
-    messagingSenderId: '750026915544',
-    projectId: 'lifespark-69501',
-    authDomain: 'lifespark-69501.firebaseapp.com',
-    storageBucket: 'lifespark-69501.appspot.com',
-    measurementId: 'G-ERJ5Q86151',
+    apiKey: 'AIzaSyDNGf1L8X-Oou4ZBf9c1-02RhBRGWZ3p0o',
+    appId: '1:74964081753:web:641c2a38197a8b79b76548',
+    messagingSenderId: '74964081753',
+    projectId: 'lifespark-2',
+    authDomain: 'lifespark-2.firebaseapp.com',
+    storageBucket: 'lifespark-2.appspot.com',
+    measurementId: 'G-RT3VNBYGWJ',
   );
 }

@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:lifespark_machine_task/src/config/alerts.dart';
 import 'package:lifespark_machine_task/src/config/navigators.dart';
 import 'package:lifespark_machine_task/src/domain/usecases/save_login_status_usecase.dart';
-import 'package:lifespark_machine_task/src/domain/usecases/verify_otp_usecase.dart';
+import 'package:lifespark_machine_task/src/presentation/providers/user_provider.dart';
 import 'package:lifespark_machine_task/src/presentation/views/create_user_screen.dart';
 import 'package:lifespark_machine_task/src/presentation/views/home_screen.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/custom_filled_button.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/logo_label_widget.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/otp_input_field.dart';
 import 'package:lifespark_machine_task/injection_container.dart' as di;
+import 'package:provider/provider.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -92,11 +93,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   Future<void> onVerifyPressed() async {
-    final verifyUserUsecase = di.getIt.get<VerifyOtpUsecase>();
     final saveLoginStatusUsecase = di.getIt.get<SaveLoginStatusUsecase>();
-
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     final result =
-        await verifyUserUsecase.call(widget.verficationId, otpController.text);
+        await userProvider.verifyOtp(widget.verficationId, otpController.text);
 
     if (result == 'success') {
       await saveLoginStatusUsecase.call(true);

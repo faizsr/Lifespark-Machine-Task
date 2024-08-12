@@ -1,15 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lifespark_machine_task/src/config/navigators.dart';
 import 'package:lifespark_machine_task/src/config/strings.dart';
-import 'package:lifespark_machine_task/src/domain/usecases/get_user_detail_usecase.dart';
 import 'package:lifespark_machine_task/src/domain/usecases/save_login_status_usecase.dart';
+import 'package:lifespark_machine_task/src/presentation/providers/user_provider.dart';
 import 'package:lifespark_machine_task/src/presentation/views/login_screen.dart';
 import 'package:lifespark_machine_task/src/presentation/widgets/logo_label_widget.dart';
 import 'package:lifespark_machine_task/injection_container.dart' as di;
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -25,33 +23,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final saveLoginStatusUsecase = di.getIt.get<SaveLoginStatusUsecase>();
-  Map<String, dynamic> user = {};
 
   @override
   void initState() {
-    getUserDetail();
+    Provider.of<UserProvider>(context, listen: false)
+        .getUserDetail(widget.loginStatus);
     super.initState();
-  }
-
-  Future<void> getUserDetail() async {
-    final getUserUsecase = di.getIt.get<GetUserDetailUsecase>();
-    final data = await getUserUsecase.call();
-    user = data;
-    setState(() {});
-    log('Data: $data ${widget.loginStatus}');
-    if (widget.loginStatus) showToast();
-  }
-
-  void showToast() {
-    Fluttertoast.showToast(
-      msg: "logged in as ${user['email']}",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.grey.shade200,
-      textColor: Colors.black54,
-      fontSize: 14.0,
-    );
   }
 
   @override
@@ -67,37 +44,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const LogoLabelWidget(),
-                  MaterialButton(
-                    minWidth: 20,
-                    elevation: 0,
-                    color: Colors.grey.shade200,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    onPressed: () async {
-                      await saveLoginStatusUsecase.call(false);
-                      nextScreenRemoveUntil(context, const LoginScreen());
-                    },
-                    child: const Text('Logout'),
-                  )
+                  logoutBtn(context),
                 ],
               ),
               const Spacer(),
               LottieBuilder.asset(spaceLottie2),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Welcome ${user['name']}!!',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                  ),
-                ),
+              Consumer<UserProvider>(
+                builder: (context, value, child) {
+                  return Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Welcome ${value.userData['name']}!!',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                      ),
+                    ),
+                  );
+                },
               ),
               const Spacer(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  MaterialButton logoutBtn(BuildContext context) {
+    return MaterialButton(
+      minWidth: 20,
+      elevation: 0,
+      color: Colors.grey.shade200,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      onPressed: () async {
+        await saveLoginStatusUsecase.call(false);
+        nextScreenRemoveUntil(context, const LoginScreen());
+      },
+      child: const Text('Logout'),
     );
   }
 }

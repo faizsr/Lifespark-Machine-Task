@@ -1,6 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:lifespark_machine_task/src/data/data_sources/local/local_data_source.dart';
 import 'package:lifespark_machine_task/src/data/data_sources/local/local_data_source_impl.dart';
 import 'package:lifespark_machine_task/src/data/data_sources/remote/remote_data_source.dart';
@@ -14,6 +14,7 @@ import 'package:lifespark_machine_task/src/domain/usecases/logout_user_usecase.d
 import 'package:lifespark_machine_task/src/domain/usecases/save_login_status_usecase.dart';
 import 'package:lifespark_machine_task/src/domain/usecases/sent_otp_usecase.dart';
 import 'package:lifespark_machine_task/src/domain/usecases/verify_otp_usecase.dart';
+import 'package:lifespark_machine_task/src/presentation/providers/user_provider.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,6 +23,16 @@ Future<void> init() async {
   await Hive.initFlutter();
   await Hive.openBox('users');
   await Hive.openBox('auth');
+
+  // ------ Providers ------
+  getIt.registerFactory<UserProvider>(
+    () => UserProvider(
+      sentOtpUsecase: getIt.call(),
+      verifyOtpUsecase: getIt.call(),
+      saveLoginStatusUsecase: getIt.call(),
+      getUserDetailUsecase: getIt.call(),
+    ),
+  );
 
   // ------ Use Cases ------
   getIt.registerLazySingleton<CreateUserUsecase>(
